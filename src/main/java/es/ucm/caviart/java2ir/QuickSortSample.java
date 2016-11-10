@@ -29,9 +29,11 @@ public class QuickSortSample {
      *
      * @param a   the array to be sorted
      * @param <T> the type of the array to sort, must be {@link Comparable}.
-     * @precd a.length >= 0
-     * @postcd sorted(a) && permut(a, 0, a.length)
      */
+    /*@
+     *@ @precd a.length >= 0
+     *@ @postcd sorted(a) && permut(a, 0, a.length)
+     @*/
     public static <T extends Comparable<T>> void quicksort(T[] a) {
         qsort(a, 0, a.length - 1);
     }
@@ -42,9 +44,11 @@ public class QuickSortSample {
      * @param j   the right index of the subarray to sort
      * @param <T> the type of the elements in the array to sort. Must be
      *            {@link Comparable}
-     * @precd a.length >= 0
-     * @postcd sorted_sub(a, i, j) && permut_sub(a, i, j)
      */
+    /*@
+     *@ @precd a.length >= 0
+     *@ @postcd sorted_sub(a, i, j) && permut_sub(a, i, j)
+      @*/
     private static <T extends Comparable<T>> void qsort(T[] v, int i, int j) {
         int p;
 
