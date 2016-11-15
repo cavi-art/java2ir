@@ -16,7 +16,6 @@
 
 package es.ucm.caviart.java2ir;
 
-import es.ucm.gpd.irparser.ast.ASTNode;
 import es.ucm.gpd.irparser.ast.VerificationUnit;
 import es.ucm.gpd.irparser.ast.tld.ToplevelDefinition;
 import spoon.processing.AbstractProcessor;
@@ -41,17 +40,22 @@ public class ClassProcessor<T> extends AbstractProcessor<CtClass<T>> {
         String className = clazz.getQualifiedName();
         Set<CtMethod<?>> classMethods = clazz.getAllMethods();
 
-        for(CtMethod<?> m: classMethods) {
+        for (CtMethod<?> m : classMethods) {
             vus.add(processMethod(m, className));
         }
     }
 
     private VerificationUnit processMethod(CtMethod<?> m, String scope) {
-        // TODO: Check if there are any pre/post conditions
         List<CtComment> comments = m.getComments();
 
-        CtBlock<?> body = m.getBody();
+        // Add metadata to method if the comment is a contract
+        comments.stream()
+                .filter(c -> c.getCommentType() == CtComment.CommentType.BLOCK)
+                .filter(c -> c.getContent().charAt(0) == '@')
+                .map(ContractFactory::of)
+                .map(c -> m.putMetadata("contract", c));
 
+        CtBlock<?> body = m.getBody();
         // TODO: Parse the body
 
         // TODO: Return a proper verification unit
@@ -72,8 +76,8 @@ public class ClassProcessor<T> extends AbstractProcessor<CtClass<T>> {
                 toplevelForms,
                 usedPackages,
                 documentation,
-                null,
-                null
+                new ArrayList<>(),
+                new ArrayList<>()
         );
     }
 }
