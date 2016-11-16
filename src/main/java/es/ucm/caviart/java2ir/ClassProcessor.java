@@ -16,6 +16,7 @@
 
 package es.ucm.caviart.java2ir;
 
+import es.ucm.caviart.java2ir.results.ResultGathererSingleton;
 import es.ucm.gpd.irparser.ast.VerificationUnit;
 import es.ucm.gpd.irparser.ast.tld.ToplevelDefinition;
 import spoon.processing.AbstractProcessor;
@@ -33,9 +34,13 @@ import java.util.Set;
  * @author Santiago Saavedra
  */
 public class ClassProcessor<T> extends AbstractProcessor<CtClass<T>> {
+
+    ResultGathererSingleton r = ResultGathererSingleton.getInstance();
+
     @Override
     public void process(CtClass<T> clazz) {
         List<VerificationUnit> vus = new ArrayList<>();
+        r.put("vu-list", vus);
 
         String className = clazz.getQualifiedName();
         Set<CtMethod<?>> classMethods = clazz.getAllMethods();
@@ -50,8 +55,7 @@ public class ClassProcessor<T> extends AbstractProcessor<CtClass<T>> {
 
         // Add metadata to method if the comment is a contract
         comments.stream()
-                .filter(c -> c.getCommentType() == CtComment.CommentType.BLOCK)
-                .filter(c -> c.getContent().charAt(0) == '@')
+                .filter(ContractFactory::qualifies)
                 .map(ContractFactory::of)
                 .map(c -> m.putMetadata("contract", c));
 
