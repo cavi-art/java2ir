@@ -17,7 +17,7 @@
 package es.ucm.caviart.java2ir;
 
 
-import es.ucm.gpd.irparser.ast.expr.Expression;
+import es.ucm.gpd.irparser.ast.ASTNode;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -32,9 +32,9 @@ public class CLIRWriter {
         this.out = out;
     }
 
-    public void writeNode(Expression node) {
+    public void writeNode(ASTNode node) {
         try {
-            out.write(node.toString().getBytes());
+            out.write(node.unparse().toString().getBytes());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

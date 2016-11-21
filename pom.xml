@@ -54,7 +54,7 @@
         <dependency>
             <groupId>com.github.cavi-art</groupId>
             <artifactId>clir-parser-java</artifactId>
-            <version>v0.2.3</version>
+            <version>v0.3.0</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
