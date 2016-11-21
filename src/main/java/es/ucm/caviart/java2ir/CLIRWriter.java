@@ -26,7 +26,7 @@ import java.io.OutputStream;
  * @author Santiago Saavedra
  */
 public class CLIRWriter {
-    private OutputStream out;
+    final private OutputStream out;
 
     public CLIRWriter(OutputStream out) {
         this.out = out;

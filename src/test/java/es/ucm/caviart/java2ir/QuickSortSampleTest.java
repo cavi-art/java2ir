@@ -17,7 +17,6 @@
 package es.ucm.caviart.java2ir;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 import static org.junit.Assert.assertEquals;
 
