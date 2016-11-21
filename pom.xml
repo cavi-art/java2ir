@@ -30,6 +30,9 @@
     <profiles>
         <profile>
             <id>java-8</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
