@@ -13,7 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package es.ucm.caviart.java2ir;
+
+package testfiles;
 
 import org.jetbrains.annotations.Contract;
 
