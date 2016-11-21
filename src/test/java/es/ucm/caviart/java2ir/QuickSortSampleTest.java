@@ -16,6 +16,8 @@
 
 package es.ucm.caviart.java2ir;
 
+import testfiles.QuickSortSample;
+
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
